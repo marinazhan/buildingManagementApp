@@ -87,29 +87,21 @@
 					<label for="single">单控模式</label>
 				</span>
 				<span class="double">
-					<input type='radio' name='moodStyle' checked='checked'/>
+					<input type='radio' name='moodStyle' />
 					<label for="double">群控模式</label>
 				</span>
 				<div class="selectDiv">
-					<select>
+					<select class="building">
+						<option value="选择楼" disabled selected>选择楼</option>
 						<option>南楼</option>
 						<option>北楼</option>
 						<option>西楼</option>
 					</select>
-					<select>
-						<option>南楼</option>
-						<option>北楼</option>
-						<option>西楼</option>
+					<select class="floor">
 					</select>
-					<select>
-						<option>南楼</option>
-						<option>北楼</option>
-						<option>西楼</option>
+					<select class="room">
 					</select>
-					<select>
-						<option>南楼</option>
-						<option>北楼</option>
-						<option>西楼</option>
+					<select class="air">
 					</select>
 				</div>
 			</div>
@@ -132,10 +124,10 @@
 				<select name="" id="windMood" class="select" disabled="disabled">
 					<option value="none">请选择</option>
 					<option value="1">送风模式</option>
-					<option value="2">除湿模式</option>
+					<option value="2">制冷模式</option>
 					<option value="3">制热模式</option>
-					<option value="4">制冷模式</option>
-					<option value="5">自动模式</option>
+					<option value="4">自动模式</option>
+					<option value="5">除湿模式</option>
 				</select>
 			</div>
 			
@@ -147,10 +139,11 @@
 				</div>
 				<select name="" id="speedSelect" class="select" disabled="disabled">
 					<option value="none">请选择</option>
-					<option value="1">高风</option>
-					<option value="2">中风</option>
-					<option value="3">低风</option>
-					<option value="4">自动风</option>
+					<option value="9">低风</option>
+					<option value="10">中风</option>
+					<option value="11">高风</option>
+					<option value="0">自动风</option>
+					<option value="7">直流风</option>
 				</select>
 			</div>
 			
@@ -164,7 +157,7 @@
 					</div>
 				</div>
 				
-				<select name="" id="temperType" class="select" disabled="disabled">
+				<select name="" id="temperType" class="select" disabled="disabled" style='display: none;'>
 					<option value="none">请选择</option>
 					<option value="1">制冷</option>
 					<option value="2">制热</option>

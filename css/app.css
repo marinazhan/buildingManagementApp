@@ -174,11 +174,11 @@ input[type=radio]:checked:after {
     margin-top: 13px;
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 .selectDiv>select{
 	width:5.6vw;
-	heigth:3vh;
+	height:3vh;
 	background-color: #0b112b;
 	padding: 0 0 0 20px;
 	border-radius: 4px;
@@ -188,7 +188,9 @@ input[type=radio]:checked:after {
 	background: url(../img/app/icon_unfold.png) no-repeat scroll 79% 52% transparent;
 	appearance: none;
 	-moz-appearance: none;
-	-webkit-appearance: none;
+    -webkit-appearance: none;
+    
+    margin-right: 0.6vw;
 	
 }
 select::-ms-expand {
