@@ -1,0 +1,347 @@
+body{
+	background-color:#0b0e26;
+	overflow:hidden;
+}
+#nav{
+    width: 100%;
+    height: 6.7vh;
+    background-color: #0b112b;
+    color: #fff;
+    font-size: 20px;
+	border-bottom: solid 1px #23456a;
+	font-size:14px;
+}
+#nav .active{
+	color:#21b9fb;
+}
+#nav>div{
+    cursor: pointer;
+    width: 17.2vw;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    height: 6.7vh;
+    line-height: 6.7vh;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#nav>div.phone{
+    width: 48.2vw;
+}
+#nav.whiteBg{
+	background-color: #ffffff;
+	box-shadow: 0px 0px 5px 0px rgba(2, 2, 2, 0.15);
+	color:#000;
+}
+#nav.whiteBg>div>.active{
+	color: #286090;
+}
+.dataBg{
+	background-color:#f0f0f0;
+}
+.underline.active{
+	width: 43px;
+	height: 4px;
+	background-color: #21b9fb;
+	border-radius: 2px;
+	text-align:center;
+	left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -10%;
+}
+#jcData.active,#lsData.active{
+	display:block;
+}
+#jcData,#lsData{
+	display:none;
+}
+#jcData,#lsData{
+    height: calc(100% - 6.7vh);
+    background-color: #f0f0f0;
+    position: absolute;
+    width: 100%;
+    overflow-y: auto;
+}
+#control{
+	display:none;
+	width:65vw;
+	height:44.4vh;
+	/* background-color:#444444; */
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+	top:0;
+	bottom:0;
+	margin-top:auto;
+	margin-bottom:auto;
+	position:absolute;
+}
+#control.active{
+	display:block;
+}
+#control>form>div{
+	width:100%;
+	height:9vh;
+	border-bottom:1px solid #23456a;
+}
+
+table{
+	left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 72vw;
+    margin-top: 2.3vh;
+}
+.default{
+	background-color:#286090;
+	color:#fff;
+	height:6vh;
+}
+tr{
+	border-bottom:1px solid #cccccc;
+}
+/* td{
+	width:10%;
+} */
+.notSingleTr{
+	background-color:#fafafa;
+}
+span{
+	color:#fff;
+	font-size:14px;
+}
+input[type=radio] {
+	/*去除浏览器默认样式*/
+    -webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	/*自定义样式*/
+    position:relative;
+	display:inline-block;
+	width:16px;
+	height:16px;
+	border:1px solid #21b9fb;
+	outline:none;
+	cursor:pointer;
+	/*设置为圆形，看起来是个单选框*/
+    -webkit-border-radius:20px;
+	-moz-border-radius:20px;
+	border-radius:20px;
+	vertical-align:middle;
+}
+input[type=radio]:after {
+	content:'';
+	position:absolute;
+	width:10px;
+	height:10px;
+	display:block;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	margin:auto;
+	background:#21b9fb;
+	-webkit-border-radius:12px;
+	-moz-border-radius:12px;
+	border-radius:12px;
+	-webkit-transform:scale(0);
+	-moz-transform:scale(0);
+	transform:scale(0);
+	/*增加一些动画*/
+    -webkit-transition:all ease-in-out 300ms;
+	-moz-transition:all ease-in-out 300ms;
+	transition:all ease-in-out 300ms;
+	
+}
+input[type=radio]:checked:after {
+	-webkit-transform:scale(1);
+	-moz-transform:scale(1);
+	transform:scale(1);
+}
+.double{
+    margin-left: 2vw;
+}
+.selectDiv{
+   	width: 25.5vw;
+    margin-top: 13px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.selectDiv>select{
+	width:5.6vw;
+	heigth:3vh;
+	background-color: #0b112b;
+	padding: 0 0 0 20px;
+	border-radius: 4px;
+	border: solid 1px #23456a;
+	
+	color:#fff;
+	background: url(../img/app/icon_unfold.png) no-repeat scroll 79% 52% transparent;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	
+}
+select::-ms-expand {
+	display: none;
+}
+.room_Admin_type_title {
+    width: 7vw;
+    height: 9vh;
+    margin-left: 0.5vw;
+    padding-top: 1%;
+}
+#Device_maintain-control .room_Admin_type:nth-child(2) .room_Admin_type_title>div:nth-child(1){
+        background: url(../img/app/icon_stauts.png) no-repeat;
+    height: 64%;
+    margin-top: 8%;
+    margin-bottom: -31%;
+    margin-left: -2%;
+}
+#Device_maintain-control .room_Admin_type:nth-child(3) .room_Admin_type_title>div:nth-child(1){
+       background: url(../img/app/icon_mode.png) no-repeat;
+    background-size: contain;
+    height: 56%;
+    margin-top: 12%;
+    margin-left: -4%;
+
+}
+#Device_maintain-control .room_Admin_type:nth-child(5) .room_Admin_type_title>div:nth-child(1){
+        background: url(../img/app/icon_temperature.png) no-repeat;
+    background-size: contain;
+    height: 94%;
+    margin-left: -12%;
+}
+#Device_maintain-control .room_Admin_type:nth-child(4) .room_Admin_type_title>div:nth-child(1){
+        background: url(../img/app/icon_wind.png) no-repeat;
+    background-size: contain;
+    height: 91%;
+    margin-left: -12%;
+}
+.room_Admin_type_title div:nth-child(2){
+       width: 4vw;
+    font-size: 0.14rem;
+    color: white;
+    line-height: 4vh;
+    margin-top: -36%;
+    margin-left: 33%;
+}
+.room_Admin_type_title div:nth-child(3){
+   /* font-size: 0.12rem;
+    color: #23456a;
+    float: right;
+    width: 4vw;
+    text-align: left;
+    margin-top: -25%; */
+    font-size: 12px;
+    color: #23456a;
+    width: 4vw;
+    text-align: left;
+    margin-top: -7%;
+    margin-left: 34%;
+}
+.room_Admin_radio {
+    width: 3.5vw;
+    height: 3.15vh;
+    margin-top: -6vh;
+    color: #8cc4e7;
+    font-size: 0.12rem;
+    cursor: pointer;
+    float: right;
+    background: url(../img/app/btn_off.png) no-repeat;
+    background-size: 100% 100%;
+}
+.room_Admin_radio_select {
+    background: url(../img/app/btn_on.png) no-repeat;
+    background-size: 100% 100%;
+}
+.room_Admin_type_title {
+    width: 7vw;
+    height: 8vh;
+    margin-left: 1.5vw;
+}
+.room_Admin_num {
+        position: relative;
+    display: inline-block;
+    width: 3.8vw;
+    height: 3.15vh;
+    margin-top: -5.5vh;
+    color: white;
+    font-size: 0.12rem;
+    cursor: pointer;
+    float: right;
+    border:1px solid #23456a;
+}
+.room_Admin_num input {
+    margin: 0px auto;
+    margin-left: 0.5vw;
+    padding: 0px;
+    height: 3.1vh;
+    color: white;
+    background: none;
+    border: none;
+    outline: none;
+}
+.room_Admin_num>div {
+    width: 1vw;
+    height: 100%;
+    /* float: right; */
+    border-left: 0.05vw solid #23456a;
+    position: absolute;
+    margin-top: -38%;
+    margin-left: 75%;
+
+}
+
+.room_Admin_num>div>span {
+    display: block;
+    width: 100%;
+    height: 50%;
+    font-size: 0.14rem;
+    color: #23456a;
+    text-align: center;
+    background: url(../img/app/btn_trangle_down.png) no-repeat;
+    background-position: center;
+}
+.room_Admin_num>div>span:nth-child(1){
+    -webkit-transform: rotate(180deg) !important;
+}
+.select {
+    position: relative;
+    display: inline-block;
+    width: 3.8vw;
+    height: 3.15vh;
+    margin-top: -5.5vh;
+    color: white;
+    font-size: 0.12rem;
+    cursor: pointer;
+    float: right;
+    border: 1px solid #23456a;
+    background-color: transparent;
+    text-align: center;
+    outline: none;
+}
+#windMood{
+	margin-left: 94%;
+    position: absolute;
+    margin-top: -4%;
+}
+.divDisabled{
+    pointer-events: none;
+}
+option{
+	background-color:#0b0e26;
+}
+#temperType{
+	    margin-left: 87%;
+    position: absolute;
+}

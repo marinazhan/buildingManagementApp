@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset=utf-8>
+	<title>深圳住建局设备信息</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/qRcode.css">
+</head>
+
+<body>
+	<nav>
+	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+	    <a class="nav-item nav-link active" id="nav-basicInfos-tab" data-toggle="tab" href="#nav-basicInfos" role="tab" aria-controls="nav-basicInfos" aria-selected="true">设备基础信息</a>
+	  <!--   <a class="nav-item nav-link" id="nav-factoryInfos-tab" data-toggle="tab" href="#nav-factoryInfos" role="tab" aria-controls="nav-factoryInfos" aria-selected="false">设备厂家信息</a> -->
+	  </div>
+	</nav>
+	
+	<div class="tab-content" id="nav-tabContent">
+	  <div class="tab-pane fade show active" id="nav-basicInfos" role="tabpanel" aria-labelledby="nav-home-tab">
+	  		<table>
+	  			<tr>
+	  				<td>空调所在位置:</td>
+	  				<td id="airPos"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>空调开关状态:</td>
+	  				<td id="airOnoff"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>空调设定温度:</td>
+	  				<td id="airTargetTemper"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>室内温度:</td>
+	  				<td id="currentTemper"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>空调风速:</td>
+	  				<td id="windSpeed"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>空调模式:</td>
+	  				<td id="windMood"></td>
+	  			</tr>
+	  			<tr>
+	  				<td>空调厂商:</td>
+	  				<td id="airFactory"></td>
+	  			</tr>
+	  		</table>
+	  </div>
+	  <!-- <div class="tab-pane fade" id="nav-factoryInfos" role="tabpanel" aria-labelledby="nav-profile-tab">
+		  <table>
+  			<tr>
+  				<td>空调厂商:</td>
+  				<td id="airFactory"></td>
+  			</tr>
+  		</table>
+  		</div> -->
+	</div>
+	
+	<script src="./js/build/jquery.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/qrCode.js"></script>
+</body>
+
+</html>
