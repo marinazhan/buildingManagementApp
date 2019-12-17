@@ -298,7 +298,13 @@ function getjcDataThen(res) {
 			}
 		}
 
-		jcHtml += "<td>" + res[i].build + "</td><td>" + res[i].floor + "楼</td><td>" + res[i].number + "</td>";
+		jcHtml += "<td>" + res[i].build + "</td><td>" + res[i].floor + "楼</td>";
+
+		if (res[i].build == '西楼' && res[i].floor == '1' && res[i].number == '104') {
+			jcHtml += "<td>200人会议室</td>";
+		} else {
+			jcHtml += "<td>" + res[i].number + "</td>";
+		}
 		jcHtml += "<td>" + res[i].controlNum + "</td><td>" + res[i].devNum + "</td><td>" + res[i].devType + "</td>";
 
 		let windSpeed = parseInt(res[i].windSpeed, 16);
@@ -382,7 +388,14 @@ function getlsDataThen(res) {//删除表格中所有非default
 			}
 		}
 
-		lsHtml += "<td>" + res[i].build + "</td><td>" + res[i].floor + "楼</td><td>" + res[i].number + "</td>";
+		lsHtml += "<td>" + res[i].build + "</td><td>" + res[i].floor + "楼</td>";
+
+		if (res[i].build == '西楼' && res[i].floor == '1' && res[i].number == '104') {
+			lsHtml += "<td>200人会议室</td>";
+		} else {
+			lsHtml += "<td>" + res[i].number + "</td>";
+		}
+
 		lsHtml += "<td>" + res[i].controlNum + "</td><td>" + res[i].devNum + "</td><td>" + res[i].devType + "</td>";
 		lsHtml += "<td>" + onOffStatus + "</td></tr>";
 	}
@@ -655,8 +668,11 @@ $('.selectDiv .floor').on('change', function () {
 	const room_num = current_floor_array[index - 1];
 
 	let dom = '<option disabled selected>选择房间</option>';
+	
 	for (let i = 1; i <= room_num; i++) {
-		if (i < 10) {
+		if (single_model_data.build == '西楼' && index == '1' && i == 4) {
+			dom += `<option>200人会议室</option>`;
+		} else if (i < 10) {
 			dom += `<option>${index}0${i}</option>`;
 		} else {
 			dom += `<option>${index}${i}</option>`;
@@ -693,7 +709,8 @@ $('.selectDiv .floor').on('change', function () {
 })
 
 $('.selectDiv .room').on('change', function () {
-	const roomNum = $(this).children('option:selected').val();
+	let roomNum = $(this).children('option:selected').val();
+	if ( roomNum == '200人会议室') roomNum = '104';
 	single_model_data.number = roomNum;
 
 	$.ajax({
@@ -942,4 +959,10 @@ function setDevsnState() {
 		$('#temperature').val('17℃');
 	}
 }
+
+// 定时更新数据
+setInterval(()=>{
+	getjcData().then(getjcDataThen);
+	getlsData().then(getlsDataThen);
+},60000)
 
