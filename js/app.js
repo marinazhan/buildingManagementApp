@@ -257,7 +257,19 @@ function isSelectDevs(control_Num, dev_Num) {
 function getjcDataThen(res) {
 	//删除表格中所有非default
 	$("#jcData>table>tr:not(.default)").remove();
-	let jcHtml = "";
+	let jcHtml = `<tr class="default">
+					<td>楼栋</td>
+					<td>楼层</td>
+					<td>房间编号</td>
+					<td>控制器号</td>
+					<td>设备号</td>
+					<td>设备类型</td>
+					<td>风速</td>
+					<td >模式</td>
+					<td>制冷温度</td>
+					<td >制热温度</td>
+					<td>实际温度</td>
+				</tr>`;
 	for (let i = 0; i < res.length; i++) {
 
 		let controlNum = res[i].controlNum;
@@ -326,7 +338,15 @@ function getlsDataThen(res) {//删除表格中所有非default
 	$("#lsData>table>tr:not(.default)").remove();
 	//	console.log(res);
 
-	let lsHtml = "";
+	let lsHtml = `<tr class="default">
+					<th>楼栋</th>
+					<th>楼层</th>
+					<th>房间编号</th>
+					<th>控制器号</th>
+					<th>设备号</th>
+					<th>设备类型</th>
+					<th>开关状态</th>
+				</tr>`;
 	for (let i = 0; i < res.length; i++) {
 		let onOffStatus = "";
 		if (res[i].onOffStatus == 1) {
@@ -638,6 +658,8 @@ $('.selectDiv .floor').on('change', function () {
 		clickDisabled();
 		restoreState();
 	} else {
+		console.log(single_model_data);
+		
 		$.ajax({
 			type: 'POST',
 			url: httpUrl + 'selectjcqIdMore.do',
