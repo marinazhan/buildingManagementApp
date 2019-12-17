@@ -1,4 +1,4 @@
-var httpUrl = "http://121.40.174.117:8080/buildingManagement2/";
+var httpUrl = "http://121.40.174.117:8080/buildingManagement/";
 // var httpUrl="http://192.168.1.117:8083/buildingManagement/";
 // var httpUrl="http://localhost:8083/buildingManagement/";
 
@@ -159,13 +159,21 @@ function IsPC() {
 }
 
 var iphoneState = IsPC();
-//console.log(iphoneState);
+console.log(iphoneState);
 if (!iphoneState) {
 	if (!$("#nav>div").hasClass("phone")) {
 		$("#nav>div").addClass("phone");
 	}
 	else {
 		$("#nav>div").removeClass("phone");
+	}
+	console.log($("#control").hasClass("phonec"));
+	if(!$("#control").hasClass("phonec")){
+		
+		$("#control").addClass("phonec");
+	}
+	else{
+		$("#control").removeClass("phonec");
 	}
 
 }

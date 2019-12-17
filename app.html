@@ -81,7 +81,7 @@
 			数据(data)：<br>
 			<input type="text" id="dataNum"/><br>
 			<input type="button" id="controlDevice" value="提交"> -->
-			<div>
+			<div class="inputPanel">
 				<span class="single">
 					<input type='radio' name='moodStyle' checked='checked'/>
 					<label for="single">单控模式</label>
@@ -109,7 +109,7 @@
 				</div>
 			</div>
 			
-			<div class="room_Admin_type">
+			<div class="room_Admin_type" id="airStatue">
 				<div class="room_Admin_type_title">
 					<div></div>
 					<div>空调状态</div>
@@ -118,7 +118,7 @@
 				<div class="room_Admin_radio divDisabled" id="onOff" data-deviceName="none"></div>
 			</div>
 			
-			<div class="room_Admin_type">
+			<div class="room_Admin_type" id="airmood">
 				<div class="room_Admin_type_title">
 					<div></div>
 					<div>空调模式</div>
@@ -134,7 +134,7 @@
 				</select>
 			</div>
 			
-			<div class="room_Admin_type">
+			<div class="room_Admin_type" id="airSpeed">
 				<div class="room_Admin_type_title">
 					<div></div>
 					<div>空调风速</div>
@@ -150,10 +150,10 @@
 				</select>
 			</div>
 			
-			<div class="room_Admin_type">
+			<div class="room_Admin_type" id="airTem">
 				<div class="room_Admin_type_title">
 					<div></div>
-					<div>设定温度</div>
+					<div id="targetTem">设定温度</div>
 					<div>
 						当前:
 						<span id="currentTemperature" class="showValue">0℃</span>
@@ -168,7 +168,7 @@
 				
 				<div class="room_Admin_num num_box">
 					<input type="text" value="0℃" class="temperature" id="temperature" disabled="disabled">
-					<div>
+					<div id="temerperButton">
 						<span class="divDisabled temperButton"></span>
 						<span class="divDisabled temperButton"></span>
 					</div>
