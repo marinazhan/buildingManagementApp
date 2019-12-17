@@ -112,8 +112,13 @@ tr{
 	width:10%;
 } */
 .notSingleTr{
-	background-color:#fafafa;
+    background-color:#fafafa;
 }
+
+.selectDev{
+    background-color:#FFC0CB;
+}
+
 span{
 	color:#fff;
 	font-size:14px;

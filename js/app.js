@@ -100,6 +100,13 @@ const clickAbled = () => {
 	}
 }
 
+//页面元素可点击 on
+const clickOnAbled = () => {
+	if ($("#onOff").hasClass("divDisabled")) {
+		$("#onOff").removeClass("divDisabled");
+	}
+}
+
 const updateState = (type, value, name) => {
 	// console.log("hehe");
 	//    console.log(value);
@@ -172,6 +179,7 @@ const getjcData = () => {
 			data: {},
 			async: true,
 			success: function (res) {
+				console.log(1112222);
 				resolve(res);
 			},
 			error: function (err) {
@@ -224,38 +232,97 @@ const controlDevices = (devsn, count, type, data) => {
 	});
 }
 
-getjcData().then(function (res) {
-	//删除表格中所有非default
-	$("#jcData>table>tr:not(.default)").remove();
-	//	console.log(res);
-	let jcHtml = "";
+function isSelectDevs(control_Num, dev_Num) {
+	let boolean = false;
+	if (tempSelectModel == 'single') {
 
-	for (let i = 0; i < res.length; i++) {
-		if (i % 2 != 0) {
-			jcHtml += "<tr><td>" + res[i].build + "</td><td>" + res[i].floor + "楼</td><td>" + res[i].number + "</td>";
-			jcHtml += "<td>" + res[i].controlNum + "</td><td>" + res[i].devNum + "</td><td>" + res[i].devType + "</td>";
-			jcHtml += "<td>" + parseInt(res[i].windSpeed, 16) + "</td>";
-			jcHtml += "<td>" + parseInt(res[i].mood, 16) + "</td>";
-			jcHtml += "<td>" + parseInt(res[i].targetTemperCold, 16) + "</td>";
-			jcHtml += "<td>" + parseInt(res[i].targetTemperHeater, 16) + "</td>";
-			jcHtml += "<td>" + parseInt(res[i].trueTemper, 16) + "</td></tr>";
-		}
-		else {
-			jcHtml += "<tr class='notSingleTr'><td>" + res[i].build + "</td><td>" + res[i].floor + "楼</td><td>" + res[i].number + "</td>";
-			jcHtml += "<td>" + res[i].controlNum + "</td><td>" + res[i].devNum + "</td><td>" + res[i].devType + "</td>";
-			jcHtml += "<td>" + parseInt(res[i].windSpeed, 16) + "</td>";
-			jcHtml += "<td>" + parseInt(res[i].mood, 16) + "</td>";
-			jcHtml += "<td>" + parseInt(res[i].targetTemperCold, 16) + "</td>";
-			jcHtml += "<td>" + parseInt(res[i].targetTemperHeater, 16) + "</td>";
-			jcHtml += "<td>" + parseInt(res[i].trueTemper, 16) + "</td></tr>";
+		if (control_Num == current_controlNum && dev_Num == current_devNum) {
+			return "<tr class='selectDev'>";
 		}
 	}
+	else if (tempSelectModel == 'double') {
 
-	$("#jcData>table").append(jcHtml);
-});
+		for (const devs of current_floor_devs) {
+			let { controlNum, devNum } = devs;
 
-getlsData().then(function (res) {
+			if (control_Num == controlNum && dev_Num == devNum) {
+				return "<tr class='selectDev'>";
+			}
+		}
+
+	}
+	return boolean;
+}
+
+function getjcDataThen(res) {
 	//删除表格中所有非default
+	$("#jcData>table>tr:not(.default)").remove();
+	let jcHtml = "";
+	for (let i = 0; i < res.length; i++) {
+
+		let controlNum = res[i].controlNum;
+		let devNum = res[i].devNum;
+
+		if (i % 2 != 0) {
+			let bool = isSelectDevs(controlNum, devNum);
+			if (bool) {
+				jcHtml += bool;
+			} else {
+				jcHtml += "<tr>";
+			}
+		} else {
+			let bool = isSelectDevs(controlNum, devNum);
+			if (bool) {
+				jcHtml += bool;
+			} else {
+				jcHtml += "<tr class='notSingleTr'>";
+			}
+		}
+
+		jcHtml += "<td>" + res[i].build + "</td><td>" + res[i].floor + "楼</td><td>" + res[i].number + "</td>";
+		jcHtml += "<td>" + res[i].controlNum + "</td><td>" + res[i].devNum + "</td><td>" + res[i].devType + "</td>";
+
+		let windSpeed = parseInt(res[i].windSpeed, 16);
+		if (windSpeed == 0) {
+			jcHtml += "<td>自动风</td>";
+		} else if (windSpeed > 0 && windSpeed < 8) {
+			jcHtml += `<td>${windSpeed}档风</td>`;
+		} else if (windSpeed == 9) {
+			jcHtml += `<td>低风</td>`;
+		} else if (windSpeed == 10) {
+			jcHtml += `<td>中风</td>`;
+		} else if (windSpeed == 11) {
+			jcHtml += `<td>高风</td>`;
+		} else if (windSpeed == 12) {
+			jcHtml += `<td>12</td>`;
+		}
+
+		let mood = parseInt(res[i].mood, 16);
+
+		if (mood == 0) {
+			jcHtml += "<td>0</td>";
+		} else if (mood == 1) {
+			jcHtml += "<td>送风模式</td>";
+		} else if (mood == 2) {
+			jcHtml += "<td>制冷模式</td>";
+		} else if (mood == 3) {
+			jcHtml += "<td>制热模式</td>";
+		} else if (mood == 4) {
+			jcHtml += "<td>自动模式</td>";
+		} else if (mood == 5) {
+			jcHtml += "<td>除湿模式</td>";
+		}
+
+		jcHtml += "<td>" + parseInt(res[i].targetTemperCold, 16) + "</td>";
+		jcHtml += "<td>" + parseInt(res[i].targetTemperHeater, 16) + "</td>";
+		jcHtml += "<td>" + parseInt(res[i].trueTemper, 16) + "</td></tr>";
+	}
+
+	$("#jcData>table").html(jcHtml);
+};
+getjcData().then(getjcDataThen);
+
+function getlsDataThen(res) {//删除表格中所有非default
 	$("#lsData>table>tr:not(.default)").remove();
 	//	console.log(res);
 
@@ -268,19 +335,33 @@ getlsData().then(function (res) {
 		else {
 			onOffStatus = "关机";
 		}
+
+		let controlNum = res[i].controlNum;
+		let devNum = res[i].devNum;
+
 		if (i % 2 != 0) {
-			lsHtml += "<tr><td>" + res[i].build + "</td><td>" + res[i].floor + "楼</td><td>" + res[i].number + "</td>";
-			lsHtml += "<td>" + res[i].controlNum + "</td><td>" + res[i].devNum + "</td><td>" + res[i].devType + "</td>";
-			lsHtml += "<td>" + onOffStatus + "</td></tr>";
+			let bool = isSelectDevs(controlNum, devNum);
+			if (bool) {
+				lsHtml += bool;
+			} else {
+				lsHtml += "<tr>";
+			}
+		} else {
+			let bool = isSelectDevs(controlNum, devNum);
+			if (bool) {
+				lsHtml += bool;
+			} else {
+				lsHtml += "<tr class='notSingleTr'>";
+			}
 		}
-		else {
-			lsHtml += "<tr class='notSingleTr'><td>" + res[i].build + "</td><td>" + res[i].floor + "楼</td><td>" + res[i].number + "</td>";
-			lsHtml += "<td>" + res[i].controlNum + "</td><td>" + res[i].devNum + "</td><td>" + res[i].devType + "</td>";
-			lsHtml += "<td>" + onOffStatus + "</td></tr>";
-		}
+
+		lsHtml += "<td>" + res[i].build + "</td><td>" + res[i].floor + "楼</td><td>" + res[i].number + "</td>";
+		lsHtml += "<td>" + res[i].controlNum + "</td><td>" + res[i].devNum + "</td><td>" + res[i].devType + "</td>";
+		lsHtml += "<td>" + onOffStatus + "</td></tr>";
 	}
-	$("#lsData>table").append(lsHtml);
-});
+	$("#lsData>table").html(lsHtml);
+};
+getlsData().then(getlsDataThen);
 
 //导航栏点击 离散数据按钮
 $("#tab-lsData").click(function (e) {
@@ -299,6 +380,8 @@ $("#tab-lsData").click(function (e) {
 	$("#lsData").addClass("active");
 
 	$("#control>table").hide();
+
+	getlsData().then(getlsDataThen);
 });
 
 //导航栏点击 寄存器数据按钮
@@ -318,6 +401,8 @@ $("#tab-jcqData").click(function (e) {
 	$("#jcData").addClass("active");
 
 	$("#control>table").hide();
+
+	getjcData().then(getjcDataThen);
 });
 //导航栏点击 反控设备按钮
 $("#tab-control").click(function (e) {
@@ -379,9 +464,9 @@ $("input").click(function () {
 
 	if (tempSelectModel == model) return;
 	tempSelectModel = model;
-	$('.selectDiv .floor').html('');
-	$('.selectDiv .room').html('');
-	$('.selectDiv .air').html('');
+	$('.selectDiv .floor').html('<option disabled selected>选择楼层</option>');
+	$('.selectDiv .room').html('<option disabled selected>选择房间</option>');
+	$('.selectDiv .air').html('<option disabled selected>选择空调</option>');
 	$('.selectDiv .building').val(['选择楼', '选择楼']);
 	if (model == 'double') {
 		$('.selectDiv .room').hide();
@@ -390,6 +475,8 @@ $("input").click(function () {
 		$('.selectDiv .room').show();
 		$('.selectDiv .air').show();
 	}
+	clickDisabled();
+	restoreState();
 });
 
 $("#onOff.room_Admin_radio").click(function () {
@@ -416,6 +503,8 @@ $("#onOff.room_Admin_radio").click(function () {
 			$("#onOffText").text("on");
 
 			setDevsnState();
+
+			clickAbled();
 		}
 	})
 	//viewController(true,0,onOffStatu,$("#onOff").attr("data-deviceName"));      
@@ -469,7 +558,7 @@ $("#windMood").change(function (e) {
 			} else if (mood == '3') {
 				current_mood_num = 5;
 			} else if (mood == '1') {
-				$('#temperType').css('display','block');
+				$('#temperType').css('display', 'block');
 			}
 
 		});
@@ -490,7 +579,8 @@ $("#temperType").change(function (e) {
 
 
 
-$('#tab-control').click();
+
+// $('#tab-control').click();
 
 let single_model_data = {
 	build: '',
@@ -502,6 +592,7 @@ let current_floor_array; // 当前层房间数组数据
 let current_controlNum,
 	current_devNum,
 	current_state;
+let current_floor_devs;
 
 
 $('.selectDiv .building').on('change', function () {
@@ -516,12 +607,13 @@ $('.selectDiv .building').on('change', function () {
 				dom += '<option>' + i + '</option>';
 			}
 			$('.selectDiv .floor').html(dom);
-			$('.selectDiv .room').html('');
-			$('.selectDiv .air').html('');
+			$('.selectDiv .room').html('<option disabled selected>选择房间</option>');
+			$('.selectDiv .air').html('<option disabled selected>选择空调</option>');
 			break;
 		};
-
 	};
+	clickDisabled();
+	restoreState();
 })
 
 $('.selectDiv .floor').on('change', function () {
@@ -539,8 +631,30 @@ $('.selectDiv .floor').on('change', function () {
 			dom += `<option>${index}${i}</option>`;
 		}
 	};
-	$('.selectDiv .room').html(dom);
-	$('.selectDiv .air').html('');
+
+	if (tempSelectModel == 'single') {
+		$('.selectDiv .room').html(dom);
+		$('.selectDiv .air').html('<option disabled selected>选择空调</option>');
+		clickDisabled();
+		restoreState();
+	} else {
+		$.ajax({
+			type: 'POST',
+			url: httpUrl + 'selectjcqIdMore.do',
+			async: true,
+			data: single_model_data,
+			dataType: 'JSON',
+			success: function (res) {
+				console.log(res);
+				clickOnAbled();
+				current_floor_devs = res;
+				// getAllselectAirInfo(res);
+			},
+			error: function (err) {
+				console.log('err', err);
+			}
+		});
+	}
 
 
 })
@@ -564,6 +678,9 @@ $('.selectDiv .room').on('change', function () {
 			}
 			if (!hasAir) dom = '<option disabled selected>无</option>';
 			$('.selectDiv .air').html(dom);
+
+			clickDisabled();
+			restoreState();
 		},
 		error: function (err) {
 			console.log(err);
@@ -571,7 +688,6 @@ $('.selectDiv .room').on('change', function () {
 	})
 
 });
-
 
 $('.selectDiv .air').on('change', function () {
 	const airId = $(this).children('option:selected').val();
@@ -599,6 +715,9 @@ $('.selectDiv .air').on('change', function () {
 
 			current_controlNum = controlNum;
 			current_devNum = devNum;
+
+			console.log(current_controlNum, current_devNum);
+
 
 			mood = parseInt(mood, 16);
 			onOffStatus = parseInt(onOffStatus, 16);
@@ -631,12 +750,13 @@ $('.selectDiv .air').on('change', function () {
 				$("#onOffText").text("on");
 
 				setDevsnState();
+				clickAbled();
 
 			} else if (onOffStatus == 0) { // 空调是关闭状态 不进行任何处理
 				restoreState();
+				clickOnAbled();
 			}
 
-			clickAbled();
 		},
 		error: function (err) {
 			console.log('err', err);
@@ -646,29 +766,69 @@ $('.selectDiv .air').on('change', function () {
 });
 
 //反控设备
-function updateDevsnState(type, data, callback) {
+function updateDevsnState(type, data, callback, devsn = current_controlNum, count = current_devNum) {
 	console.log(type, data);
 
-	$.ajax({
-		type: 'POST',
-		url: httpUrl + 'controlDevices.do',
-		async: true,
-		data: {
-			devsn: current_controlNum,//控制器号
-			count: current_devNum,//设备号
-			type: type,//类型
-			data: data//data
-		},
-		dataType: 'JSON',
-		success: function (res) {
-			console.log(res);
+	if (tempSelectModel == 'single') {
+		$.ajax({
+			type: 'POST',
+			url: httpUrl + 'controlDevices.do',
+			async: true,
+			data: {
+				devsn,//控制器号
+				count,//设备号
+				type,//类型
+				data//data
+			},
+			dataType: 'JSON',
+			success: function (res) {
+				console.log(res);
+				callback();
+			},
+			error: function (err) {
+				console.log('err', err);
+				alert('反控设备失败');
+			}
+		});
+	} else {
+		// 
+
+		for (const devs of current_floor_devs) {
+
+			let {
+				controlNum: devsn,
+				devNum: count
+			} = devs;
+
+			$.ajax({
+				type: 'POST',
+				url: httpUrl + 'controlDevices.do',
+				async: true,
+				data: {
+					devsn,//控制器号
+					count,//设备号
+					type,//类型
+					data//data
+				},
+				dataType: 'JSON',
+				success: function (res) {
+					console.log(res);
+					// callback();
+				},
+				error: function (err) {
+					console.log('err', err);
+					alert('反控设备失败');
+				}
+			});
+
 			callback();
-		},
-		error: function (err) {
-			console.log('err', err);
-			alert('反控设备失败');
-		}
-	});
+
+		};
+
+
+	}
+
+
 };
 
 // 重置状态
@@ -709,8 +869,9 @@ function setDevsnState() {
 
 	// 空调模式
 	$('#windMood').val(mood);
+	if (mood == 0) $('#windMood').val(4);
 	$('#airMoodText').html($('#windMood option:selected').text());
-	if(mood == 1) $('#temperType').css('display','block');
+	if (mood == 1) $('#temperType').css('display', 'block');
 
 	// 设置风速
 	if (windSpeed >= 1 && windSpeed <= 7) {
@@ -735,8 +896,7 @@ function setDevsnState() {
 		$('#temperature').val(targetTemperHeater + '℃');
 		current_mood_num = 5;
 	} else {
-		$('#temperature').val('0℃');
+		$('#temperature').val('17℃');
 	}
 }
-
 
