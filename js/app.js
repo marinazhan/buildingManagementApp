@@ -76,9 +76,9 @@ const clickDisabled = () => {
 	if (!$("#windMood").prop("disabled")) {
 		$("#windMood").prop("disabled", true);
 	}
-	if (!$("#temperType").prop("disabled")) {
-		$("#temperType").prop("disabled", true);
-	}
+	// if (!$("#temperType").prop("disabled")) {
+	// 	$("#temperType").prop("disabled", true);
+	// }
 }
 
 //页面元素可点击
@@ -95,9 +95,9 @@ const clickAbled = () => {
 	if ($("#windMood").prop("disabled")) {
 		$("#windMood").prop("disabled", false);
 	}
-	if ($("#temperType").prop("disabled")) {
-		$("#temperType").prop("disabled", false);
-	}
+	// if ($("#temperType").prop("disabled")) {
+	// 	$("#temperType").prop("disabled", false);
+	// }
 }
 
 //页面元素可点击 on
@@ -187,7 +187,6 @@ const getjcData = () => {
 			data: {},
 			async: true,
 			success: function (res) {
-				console.log(1112222);
 				resolve(res);
 			},
 			error: function (err) {
@@ -585,8 +584,12 @@ $("#windMood").change(function (e) {
 				current_mood_num = 4;
 			} else if (mood == '3') {
 				current_mood_num = 5;
-			} else if (mood == '1') {
-				$('#temperType').css('display', 'block');
+			} 
+			
+			if (mood == '1') {
+				$('#airTem .room_Admin_num.num_box').css('display', 'none');
+			} else {
+				$('#airTem .room_Admin_num.num_box').css('display', 'block');
 			}
 
 		});
@@ -594,15 +597,15 @@ $("#windMood").change(function (e) {
 });
 
 //温度制冷制热切换
-$("#temperType").change(function (e) {
-	if ($("#temperType").val() != "none") {
-		if (mood == '1') {
-			current_mood_num = 4;
-		} else if (mood == '2') {
-			current_mood_num = 5;
-		}
-	}
-});
+// $("#temperType").change(function (e) {
+// 	if ($("#temperType").val() != "none") {
+// 		if (mood == '1') {
+// 			current_mood_num = 4;
+// 		} else if (mood == '2') {
+// 			current_mood_num = 5;
+// 		}
+// 	}
+// });
 //漏洞且还
 
 
@@ -784,6 +787,7 @@ $('.selectDiv .air').on('change', function () {
 
 			} else if (onOffStatus == 0) { // 空调是关闭状态 不进行任何处理
 				restoreState();
+				clickDisabled();
 				clickOnAbled();
 			}
 
@@ -901,20 +905,29 @@ function setDevsnState() {
 	$('#windMood').val(mood);
 	if (mood == 0) $('#windMood').val(4);
 	$('#airMoodText').html($('#windMood option:selected').text());
-	if (mood == 1) $('#temperType').css('display', 'block');
+
+	if (mood == '1') {
+		$('#airTem .room_Admin_num.num_box').css('display', 'none');
+	} else {
+		$('#airTem .room_Admin_num.num_box').css('display', 'block');
+	}
 
 	// 设置风速
 	if (windSpeed >= 1 && windSpeed <= 7) {
 		$('#speedSelect').val(7);
-	} else if (windSpeed == 9) {
+	} 
+	// else if (windSpeed == 9) {
+	// 	$('#speedSelect').val(windSpeed);
+	// } else if (windSpeed == 10) {
+	// 	$('#speedSelect').val(windSpeed);
+	// } else if (windSpeed == 11) {
+	// 	$('#speedSelect').val(windSpeed);
+	// } else if (windSpeed == 0) {
+	// 	$('#speedSelect').val(windSpeed);
+	// }
+	else {
 		$('#speedSelect').val(windSpeed);
-	} else if (windSpeed == 10) {
-		$('#speedSelect').val(windSpeed);
-	} else if (windSpeed == 11) {
-		$('#speedSelect').val(windSpeed);
-	} else if (windSpeed == 0) {
-		$('#speedSelect').val(windSpeed);
-	}
+	};
 	$('#airWindSpeed').html($('#speedSelect option:selected').text());
 
 	// 设置温度

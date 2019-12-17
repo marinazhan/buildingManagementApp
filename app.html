@@ -11,64 +11,28 @@
 	<link rel="stylesheet" href="./css/app.css">
 </head>
 
-<body class="dataBg">
-	<div id="nav" class="whiteBg">
+<!-- <body class="dataBg">
+	<div id="nav" class="whiteBg"> -->
+<body>
+	<div id="nav">
 		<div>
-			<div id="tab-lsData" class="active">
-				<div>离散数据</div>
+			<div id="tab-control" class="active">
+				<div>反控设备</div>
 				<div class="underline active"></div>
+			</div>
+			<div id="tab-lsData">
+				<div>离散数据</div>
+				<div class="underline"></div>
 			</div>
 			<div id="tab-jcqData">
 				<div>寄存器数据</div>
 				<div class="underline"></div>
 			</div>
-			<div id="tab-control">
-				<div>反控设备</div>
-				<div class="underline"></div>
-			</div>
 		</div>
 	</div>
-	
-	<!-- 寄存器数据  -->
-	<div id="jcData" class="tab">
-		<table>
-			<tbody>
-				<tr class="default">
-				  <td>楼栋</td>
-				  <td>楼层</td>
-				  <td>房间编号</td>
-				  <td>控制器号</td>
-				  <td>设备号</td>
-				  <td>设备类型</td>
-				  <td>风速</td>
-				  <td >模式</td>
-				  <td>制冷温度</td>
-				  <td >制热温度</td>
-				  <td>实际温度</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	
-	<!-- 离散数据  -->
-	<div id="lsData" class="active tab">
-		<table>
-			<tbody>
-				<tr class="default">
-				  <th>楼栋</th>
-				  <th>楼层</th>
-				  <th>房间编号</th>
-				  <th>控制器号</th>
-				  <th>设备号</th>
-				  <th>设备类型</th>
-				  <th>开关状态</th>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	
-	
-	<div id="control" class="tab">
+
+	<!-- 反控设备 -->
+	<div id="control" class="tab active">
 		<form id="Device_maintain-control">
 			<!-- 控制器编号(devsn):<br>
 			<input type="text" id="controlNum"/><br>
@@ -297,6 +261,45 @@
 				</tbody>
 			</table> -->
 	</div>
+	
+	<!-- 寄存器数据  -->
+	<div id="jcData" class="tab">
+		<table>
+			<tbody>
+				<tr class="default">
+				  <td>楼栋</td>
+				  <td>楼层</td>
+				  <td>房间编号</td>
+				  <td>控制器号</td>
+				  <td>设备号</td>
+				  <td>设备类型</td>
+				  <td>风速</td>
+				  <td >模式</td>
+				  <td>制冷温度</td>
+				  <td >制热温度</td>
+				  <td>实际温度</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<!-- 离散数据  -->
+	<div id="lsData" class="tab">
+		<table>
+			<tbody>
+				<tr class="default">
+				  <th>楼栋</th>
+				  <th>楼层</th>
+				  <th>房间编号</th>
+				  <th>控制器号</th>
+				  <th>设备号</th>
+				  <th>设备类型</th>
+				  <th>开关状态</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
 	<!--  <iframe id = "iframe" src = "cnblogs.com/data.html" style = "display:none" onload = "getData()"></iframe>-->
 	<script src="./js/build/jquery.min.js"></script>
 	<script src="./js/app.js"></script>
